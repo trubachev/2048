@@ -1,9 +1,12 @@
 export default (state) => {
   state.grid.forEach((row) => {
-    const rowLength = row.length - 1
-    row.reverse().forEach((cell, cellIndex) => {  
-      if (!cell) return
-      if (cellIndex === rowLength) return
+    let rowLength = row.length - 1
+    
+    for (var cellIndex = rowLength; cellIndex >= 0; cellIndex--) {
+      const cell = row[cellIndex]
+      
+      if (!cell) continue
+      if (cellIndex === rowLength) continue
 
       let newCellIndex = cellIndex + 1
 
@@ -17,6 +20,6 @@ export default (state) => {
         row[newCellIndex] = cell
         row[cellIndex] = null
       }
-    })
+    }
   })
 }
