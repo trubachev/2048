@@ -1,3 +1,5 @@
 import startApp from "./app"
 
-startApp()
+document.addEventListener("DOMContentLoaded", () => {
+  startApp()  
+})
