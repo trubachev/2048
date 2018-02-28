@@ -4,6 +4,7 @@ import addNewCell from "./add_new_cell"
 import moveLeft from "./move_left"
 import moveRight from "./move_right"
 import moveUp from "./move_up"
+import moveDown from "./move_down"
 
 export default function () {
   console.log("App started")
@@ -21,7 +22,11 @@ export default function () {
       addNewCell(state)
       render(rootEl, state)
     }
-    if (e.key === "ArrowDown") console.log("Down")
+    if (e.key === "ArrowDown") {
+      moveDown(state)
+      addNewCell()
+      render(rootEl, state)
+    }
     if (e.key === "ArrowLeft") {
       moveLeft(state)
       addNewCell(state)
