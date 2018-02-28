@@ -1,5 +1,6 @@
-export default (state) => {
+export default (state, callback) => {
   const grid = state.grid
+  let stateChanged = false
 
   const rowLenght = grid[0].length - 1 
   for (var cellIndex = 0; cellIndex <= rowLenght; cellIndex++) {
@@ -20,15 +21,19 @@ export default (state) => {
       if ((newRowIndex === 0) && !(grid[newRowIndex][cellIndex])) {
         grid[newRowIndex][cellIndex] = cell
         grid[rowIndex][cellIndex] = null
+        stateChanged = true
       } else {
         if (grid[rowIndex][cellIndex] === grid[newRowIndex-1][cellIndex]) {
           grid[newRowIndex-1][cellIndex] = grid[newRowIndex-1][cellIndex] + grid[rowIndex][cellIndex]
           grid[rowIndex][cellIndex] = null
+          stateChanged = true
         } else if (!(grid[newRowIndex][cellIndex])) {
           grid[newRowIndex][cellIndex] = cell
           grid[rowIndex][cellIndex] = null
+          stateChanged = true
         }
       }
     })
   }
+  callback(state, stateChanged)
 }
