@@ -24,7 +24,7 @@ export default function () {
     }
     if (e.key === "ArrowDown") {
       moveDown(state)
-      addNewCell()
+      addNewCell(state)
       render(rootEl, state)
     }
     if (e.key === "ArrowLeft") {
