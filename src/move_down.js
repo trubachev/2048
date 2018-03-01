@@ -1,42 +1,21 @@
+import moveLine from "./move_line"
+
 export default (state, callback) => {
-  const grid = state.grid
-  let stateChanged = false
+  const oldGrid = state.grid.toString()
 
-  const rowLength = grid[0].length - 1 
-  for (var cellIndex = 0; cellIndex <= rowLength; cellIndex++) {
+  let rotatedGrid = state.grid[0].map((col, i) => state.grid.map(row => row[i]))
+  rotatedGrid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
+  rotatedGrid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
 
-    for (var rowIndex = rowLength; rowIndex >= 0; rowIndex--) {
-      const cell = grid[rowIndex][cellIndex]
-      if (!cell) continue
-      if (rowIndex === rowLength) continue
+  rotatedGrid = rotatedGrid.map(line => {
+    return moveLine(line.reverse()).reverse()
+  })
 
-      let newRowIndex = rowIndex + 1
+  state.grid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
 
-      if ((grid[newRowIndex][cellIndex] === grid[rowIndex][cellIndex]) ||
-          (grid[newRowIndex][cellIndex])) newRowIndex = rowIndex
-
-      while (newRowIndex < rowLength) {
-        if (grid[newRowIndex + 1][cellIndex]) break
-        newRowIndex++
-      }
-
-      if ((newRowIndex === rowLength) && !grid[newRowIndex][cellIndex]) {
-        grid[newRowIndex][cellIndex] = cell
-        grid[rowIndex][cellIndex] = null
-        stateChanged = true
-      } else {
-        if (grid[rowIndex][cellIndex] === grid[newRowIndex+1][cellIndex]) {
-          grid[newRowIndex+1][cellIndex] = grid[newRowIndex+1][cellIndex] + grid[rowIndex][cellIndex]
-          grid[rowIndex][cellIndex] = null
-          stateChanged = true
-        } else if (!(grid[newRowIndex][cellIndex])) {
-          grid[newRowIndex][cellIndex] = cell
-          grid[rowIndex][cellIndex] = null
-          stateChanged = true
-        }
-      }
-    }
-  }
-
-  callback(state, stateChanged)
+  const newGrid = state.grid.toString()
+  
+  const gridChanged = oldGrid !== newGrid
+  
+  callback(state, gridChanged)
 }

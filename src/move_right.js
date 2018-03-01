@@ -1,30 +1,16 @@
+import moveLine from "./move_line"
+
 export default (state, callback) => {
-  let stateChanged = false
 
-  state.grid.forEach((row) => {
-    let rowLength = row.length - 1
-    
-    for (var cellIndex = rowLength; cellIndex >= 0; cellIndex--) {
-      const cell = row[cellIndex]
-      
-      if (!cell) continue
-      if (cellIndex === rowLength) continue
+  const oldGrid = state.grid.toString()
 
-      let newCellIndex = cellIndex + 1
-
-      if (row[newCellIndex]) newCellIndex = cellIndex
-      while(!row[newCellIndex+1] && (newCellIndex < rowLength)) newCellIndex++
-      
-      if (row[cellIndex] === row[newCellIndex+1]) {
-        row[newCellIndex+1] = row[newCellIndex+1] + row[cellIndex]
-        row[cellIndex] = null
-        stateChanged = true
-      } else if (!row[newCellIndex]){
-        row[newCellIndex] = cell
-        row[cellIndex] = null
-        stateChanged = true
-      }
-    }
+  state.grid = state.grid.map(line => {
+    return moveLine(line.reverse()).reverse()
   })
-  callback(state, stateChanged)
+  
+  const newGrid = state.grid.toString()
+  
+  const gridChanged = oldGrid !== newGrid
+
+  callback(state, gridChanged)
 }
