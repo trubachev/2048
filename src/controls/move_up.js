@@ -5,7 +5,7 @@ export default (state, callback) => {
 
   let rotatedGrid = state.grid[0].map((col, i) => state.grid.map(row => row[i]))
 
-  rotatedGrid = rotatedGrid.map(moveLine)
+  rotatedGrid = rotatedGrid.map(line => moveLine(line, state))
 
   rotatedGrid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
   rotatedGrid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))

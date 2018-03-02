@@ -6,6 +6,7 @@ export default () => {
       [null, null, null, null],
       [null, null, null, null]
     ],
-    score: 0
+    score: 0,
+    result: null
   }
 }

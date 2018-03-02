@@ -7,9 +7,7 @@ export default (state, callback) => {
   rotatedGrid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
   rotatedGrid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
 
-  rotatedGrid = rotatedGrid.map(line => {
-    return moveLine(line.reverse()).reverse()
-  })
+  rotatedGrid = rotatedGrid.map(line => moveLine(line.reverse(), state).reverse())
 
   state.grid = rotatedGrid[0].map((col, i) => rotatedGrid.map(row => row[i]))
 

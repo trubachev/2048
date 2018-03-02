@@ -1,4 +1,4 @@
-export default function (line) {
+export default function (line, state) {
   line.forEach((cell, index) => {
 
     if (!line[index]) {
@@ -9,7 +9,7 @@ export default function (line) {
         cutSize++
       }
 
-      if ((cutSize > 0) && (cutSize !== (line.length - index))) line = line.concat(line.splice(index, cutSize))
+      if ((cutSize > 0)  && (cutSize !== (line.length - index))) line = line.concat(line.splice(index, cutSize))
     }
     
     if (index === line.length - 1) return
@@ -18,9 +18,11 @@ export default function (line) {
     if (line[index + 1] && (line[index] === line[index + 1])) {
       line[index] += line[index + 1]
       line[index + 1] = null
+      state.score += line[index]
     } else if (line[index - 1] && (line[index] === line[index - 1])) {
       line[index - 1] += line[index - 1]
       line[index] = null
+      state.score += line[index - 1]
     }
   })
   return line

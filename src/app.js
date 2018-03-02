@@ -1,33 +1,48 @@
-import render from "./render"
+import render from "./render/index"
 import defaultState from "./default_state"
-import addNewCell from "./add_new_cell"
-import moveLeft from "./move_left"
-import moveRight from "./move_right"
-import moveUp from "./move_up"
-import moveDown from "./move_down"
+import { addNewCell, moveUp, moveDown, moveRight, moveLeft, isWin, canMove } from "./controls"
+
+
 
 export default function () {
+
   console.log("2048 app started")
 
-  const state = defaultState()
-
-  addNewCell(state)
-  addNewCell(state)
+  let state
 
   const rootEl = document.getElementById("root")
-  render(rootEl, state)
+  
+  newGame()
+
+  function newGame() {
+    state = defaultState()
+    addNewCell(state)
+    addNewCell(state)
+    render(state, rootEl)
+  }
 
   function controllCallback(state, stateChanged) {
-    if (!stateChanged) return
-    addNewCell(state)
-    render(rootEl, state)
+    if (stateChanged) {
+      addNewCell(state)
+      if (isWin(state)) state.result = "win"
+    }
+    
+    if (!canMove(state)) state.result = "lose"
+    render(state, rootEl)
   }
 
   document.addEventListener("keydown", (e) => {
+    if (state.result) return
     if (e.key === "ArrowUp") moveUp(state, controllCallback)
     if (e.key === "ArrowDown") moveDown(state, controllCallback)
     if (e.key === "ArrowLeft") moveLeft(state, controllCallback)
     if (e.key === "ArrowRight") moveRight(state, controllCallback)
+  })
+
+  const newGameButton = document.getElementById("new-game")
+  newGameButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    newGame()
   })
 
 }

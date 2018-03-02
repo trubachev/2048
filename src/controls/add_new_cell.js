@@ -6,10 +6,8 @@ export default (state) => {
 
   const canAddCell = grid.map((row) => row.indexOf(null) === -1).indexOf(false) !== -1
   
-  if (!canAddCell) {
-    console.log("No moves. You lose")
-    return
-  }
+  if (!canAddCell) return
+
   let randomRow = Math.round(Math.random() * (grid.length - 1))
   let randomCol = Math.round(Math.random() * (grid.length - 1))
   let selectedCell = grid[randomRow][randomCol]
