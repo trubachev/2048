@@ -9,5 +9,5 @@ export default (state) => {
       if (state.grid[i][j] === state.grid[i+1][j]) return true
     }
   }
-
+  return false
 }
