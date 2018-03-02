@@ -14,6 +14,20 @@ export default function () {
   
   newGame()
 
+  document.addEventListener("keydown", (e) => {
+    if (state.result) return
+    if (e.key === "ArrowUp") moveUp(state, controllCallback)
+    if (e.key === "ArrowDown") moveDown(state, controllCallback)
+    if (e.key === "ArrowLeft") moveLeft(state, controllCallback)
+    if (e.key === "ArrowRight") moveRight(state, controllCallback)
+  })
+
+  const newGameButton = document.getElementById("new-game")
+  newGameButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    newGame()
+  })
+
   function newGame() {
     state = defaultState()
     addNewCell(state)
@@ -30,19 +44,4 @@ export default function () {
     if (!canMove(state)) state.result = "lose"
     render(state, rootEl)
   }
-
-  document.addEventListener("keydown", (e) => {
-    if (state.result) return
-    if (e.key === "ArrowUp") moveUp(state, controllCallback)
-    if (e.key === "ArrowDown") moveDown(state, controllCallback)
-    if (e.key === "ArrowLeft") moveLeft(state, controllCallback)
-    if (e.key === "ArrowRight") moveRight(state, controllCallback)
-  })
-
-  const newGameButton = document.getElementById("new-game")
-  newGameButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    newGame()
-  })
-
 }
