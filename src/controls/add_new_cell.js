@@ -6,8 +6,9 @@ export default (state) => {
   if (Math.random() > 0.1) newCell.value = 2
   else newCell.value = 4
 
-  const canAddCell = grid.map(row => row.map(el => !el.value).indexOf(false)).indexOf(-1) !== -1
-  
+  const canAddCell = grid.map(row => row.map(el => el.value).indexOf(null)).indexOf(-1) !== -1 
+  console.log(canAddCell)
+  console.log(state) 
   if (!canAddCell) return
 
   let randomRow = Math.round(Math.random() * (grid.length - 1))

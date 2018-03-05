@@ -8,14 +8,15 @@ export default (state, rootEl) => {
   
   state.grid.forEach((row, rowIndex) => {
     row.forEach((cell, cellIndex) => {
+      if (cell.ell) return
+
       const cellEl = document.createElement("div")
       cellEl.classList.add("cell")
-      if (cell.value) cellEl.classList.add("cell" + cell.value)
+      if (cell.value) cellEl.classList.add(`cell${cell.value}`)
       cellEl.innerHTML = cell.value
       cellEl.style.left = cellIndex * CELL_SIZE 
       cellEl.style.top = rowIndex * CELL_SIZE
       gridEl.appendChild(cellEl)
-
       cell.el = cellEl
     })
   })

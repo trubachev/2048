@@ -1,5 +1,5 @@
 export default (state) => {
-  
+  if (!state.canMove) return false
   for(let i = 0; i < state.grid.length; i++) {
     for(let j = 0; j < state.grid[0].length; j++) {
       if (!state.grid[i][j].value) return true

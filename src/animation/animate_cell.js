@@ -1,30 +1,23 @@
 import { ANIMATION_TIME, CELL_SIZE } from "../constants"
 
-export default (cell) => {
+export default (cell, callback) => {
   if (!cell.el) return
-
+  
   const distX = cell.X * CELL_SIZE
   const currX = parseFloat(getComputedStyle(cell.el).left)
-  let speed = Math.abs(currX - distX) / ANIMATION_TIME / 60
-
+  let speed = Math.abs(currX - distX) / ANIMATION_TIME * 1000/60.0
   if (currX > distX) speed = -speed
 
   function moveCell () {
     var cur = parseFloat(getComputedStyle(cell.el).left)
     
-    setTimeout(function () {
+    setTimeout(() => {
       if (Math.abs(cur - distX) > Math.abs(speed)) {
         cell.el.style.left = `${cur + speed}px`
         moveCell()
       } else {
-
-        if (cell.newValue) {
-          cell.el.style.left = `${distX}px`
-          cell.el.innerHTML = cell.newValue
-        } else {
-          cell.el.remove()
-        }
-        
+        cell.el.style.left = `${distX}px`
+        if (callback) callback()
       }
     }, 1000/60.0)
   }

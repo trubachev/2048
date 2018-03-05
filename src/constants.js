@@ -1,2 +1,2 @@
 export const CELL_SIZE = 65
-export const ANIMATION_TIME = 0.1
+export const ANIMATION_TIME = 300
