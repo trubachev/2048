@@ -1,29 +1,18 @@
 export default function (line, state) {
+
+  line = line.filter(el => !!el)
+
   line.forEach((cell, index) => {
+    if (!cell) return 
 
-    if (!line[index]) {
-      let cutSize = 0
-
-      while(cutSize < line.length - index) {
-        if (line[index + cutSize]) break
-        cutSize++
-      }
-
-      if ((cutSize > 0)  && (cutSize !== (line.length - index))) line = line.concat(line.splice(index, cutSize))
-    }
-    
-    if (index === line.length - 1) return
-
-    if (!line[index]) return
-    if (line[index + 1] && (line[index] === line[index + 1])) {
+    if (cell === line[index + 1]) {
       line[index] += line[index + 1]
-      line[index + 1] = null
+      line.splice(index + 1, 1)
       state.score += line[index]
-    } else if (line[index - 1] && (line[index] === line[index - 1])) {
-      line[index - 1] += line[index - 1]
-      line[index] = null
-      state.score += line[index - 1]
+
     }
   })
+
+  line = line.concat(Array(4 - line.length).fill(null))
   return line
 }
