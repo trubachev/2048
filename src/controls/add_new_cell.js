@@ -1,17 +1,19 @@
 export default (state) => {
-  let newCell
   const grid = state.grid
-  if (Math.random() > 0.1) newCell = 2
-  else newCell = 4
 
-  const canAddCell = grid.map((row) => row.indexOf(null) === -1).indexOf(false) !== -1
+  const newCell = {}
+  
+  if (Math.random() > 0.1) newCell.value = 2
+  else newCell.value = 4
+
+  const canAddCell = grid.map(row => row.map(el => !el.value).indexOf(false)).indexOf(-1) !== -1
   
   if (!canAddCell) return
 
   let randomRow = Math.round(Math.random() * (grid.length - 1))
   let randomCol = Math.round(Math.random() * (grid.length - 1))
   let selectedCell = grid[randomRow][randomCol]
-  while (selectedCell) {
+  while (selectedCell.value) {
     randomRow = Math.round(Math.random() * (grid.length - 1))
     randomCol = Math.round(Math.random() * (grid.length - 1))
     selectedCell = grid[randomRow][randomCol]

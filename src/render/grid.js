@@ -10,11 +10,13 @@ export default (state, rootEl) => {
     row.forEach((cell, cellIndex) => {
       const cellEl = document.createElement("div")
       cellEl.classList.add("cell")
-      cellEl.classList.add("cell" + cell)
-      cellEl.innerHTML = cell
+      if (cell.value) cellEl.classList.add("cell" + cell.value)
+      cellEl.innerHTML = cell.value
       cellEl.style.left = cellIndex * CELL_SIZE 
       cellEl.style.top = rowIndex * CELL_SIZE
       gridEl.appendChild(cellEl)
+
+      cell.el = cellEl
     })
   })
 

@@ -26,6 +26,7 @@ html {
   font-size: 1.5em;
   font-weight: bolder;
   border: 2px solid gray;
+  z-index: 0;
 }
 
 .button {
@@ -40,44 +41,55 @@ html {
 .cell2 {
   background-color: rgb(255, 207, 193);
   color: gray;
+  z-index: 1;
 }
 
 .cell4 {
   background-color: rgb(255, 169, 143);
+  z-index: 1;
 }
 
 .cell8 {
   background-color: rgb(252, 132, 96);
+  z-index: 1;
 }
 
 .cell16 {
   background-color: rgb(255, 101, 55);
+  z-index: 1;
 }
 
 .cell32 {
   background-color: rgb(255, 84, 32);
+  z-index: 1;
 }
 
 .cell64 {
   background-color: rgb(226, 53, 0);
+  z-index: 1;
 }
 
 .cell128 {
   background-color: hsl(61, 73%, 64%);
+  z-index: 1;
 }
 
 .cell256 {
   background-color: hsl(61, 100%, 45%);
+  z-index: 1;
 }
 
 .cell512 {
   background-color: hsl(91, 68%, 60%);
+  z-index: 1;
 }
 
 .cell1024 {
   background-color: hsl(91, 74%, 51%);
+  z-index: 1;
 }
 
 .cell2048 {
   background-color: hsl(91, 96%, 45%);
+  z-index: 1;
 }
